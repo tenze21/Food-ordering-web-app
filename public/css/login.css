@@ -1,0 +1,98 @@
+:root {
+  --primary: #e67817;
+  --blue: #0127d1;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Open sans", serif;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 700;
+  --radius-large: 0.625rem;
+  --radius-small: 0.5rem;
+  --transition-hover: all 200ms ease-in-out; 
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--primary);
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin-bottom: 1rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      .password-icon {
+        position: absolute;
+        right: 1rem;
+        font-size: 1.5rem;
+        top: 10px;
+        transition: all 200ms ease-in-out;
+        &:hover {
+          cursor: pointer;
+        }
+    }
+    a {
+      font-size: 0.8rem;
+      font-family: var(--font-secondary);
+      align-self: flex-end;
+    }
+    small{
+        color: #f00;
+    }
+      input {
+        height: 45px;
+        border-radius: var(--radius-small);
+        width: 320px;
+        padding-left: 1rem;
+        border: #aeaeae;
+        outline: #aeaeae;
+        font-family: var(--font-secondary);
+        box-shadow: 2px 2px 2px rgb(0 0 0 /0.5);
+        &:focus-visible {
+          outline: 2px solid #000;
+        }
+      }
+    }
+    input[type="submit"]{
+        height: 35px;
+        width: 200px;
+        align-self: center;
+        margin-top: 1rem;
+        cursor: pointer;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: var(--radius-small);
+        font-family: var(--font-primary);
+        font-weight: var(--font-weight-extra-bold);
+        transition: var(--transition-hover);
+        &:hover{
+            background-color: #000;
+            color: var(--primary);
+        }
+    }
+  }
+}
