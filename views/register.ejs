@@ -1,0 +1,65 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <main class="wrapper">
+        <h1>Register</h1>
+        <h2>Please provide valid data in the provided fields.</h2>
+        <form action="/auth/register" method="post" id="registration">
+            <div class="form-field">
+                <label for="name">Full name:</label>
+                <input type="text" name="name" id="name" autocomplete="off" spellcheck="false" autofocus required>
+                <small></small>
+            </div>
+            <div class="form-field">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="number" name="contactNumber" id="contactNumber" autocomplete="off" spellcheck="false" required>
+                <small></small>
+            </div>
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="text" name="name" id="name" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="form-field">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label>Address:</label>
+                <input type="text" name="address" id="address" placeholder="ex. L-302" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="form-field">
+                <label for="designation">Designation:</label>
+                <select name="designation" id="designation" required>
+                    <option value="">Designation</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Staff">Staff</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" autocomplete="off" spellcheck="false" required>
+                <i class='bx bxs-hide password-icon' id="password-icon1"></i>
+                <small></small>
+            </div>
+            <div class="form-field">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" name="password2" id="password2" spellcheck="false" autocomplete="off" required>
+                <i class='bx bxs-hide password-icon' id="password-icon2"></i>
+                <small></small>
+            </div>
+            <div class="form-field declaration">
+                <input type="checkbox" name="declaration" id="declaration" required>
+                <label for="declaration">I hereby declare that the information I have provided is valid and am aware that service could be denied in the matter of improper information.</label>
+            </div>
+            <input type="submit" value="Submit">
+            <p>Already have an account? <a href="/auth/login">Login <i class='bx bx-link-external'></i></a></p>
+        </form>
+    </main>
+    <script src="/js/register.js"></script>
+</body>
