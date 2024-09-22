@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema({
@@ -16,11 +15,10 @@ const userSchema = new mongoose.Schema({
         required : true,
         unique: true,
         lowercase: true,
-        validate: validator.isEmail,
     },
     gender: {
         type: String,
-        enum: ['male', 'female', 'other'],
+        enum: ['Male', 'Female', 'Other'],
         required: true,
     },
     address: {
@@ -29,6 +27,7 @@ const userSchema = new mongoose.Schema({
     },
     designation: {
         type: String,
+        enum:['Student', 'Faculty'],
         required : true,
     },
     password: {

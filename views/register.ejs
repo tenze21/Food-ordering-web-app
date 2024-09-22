@@ -3,6 +3,8 @@
 </head>
 <body>
     <main class="wrapper">
+        <%- include('./layouts/flash-message') %>
+        
         <h1>Register</h1>
         <h2>Please provide valid data in the provided fields.</h2>
         <form action="/auth/register" method="post" id="registration">
@@ -18,7 +20,7 @@
             </div>
             <div class="form-field">
                 <label for="email">Email:</label>
-                <input type="text" name="name" id="name" autocomplete="off" spellcheck="false" required>
+                <input type="email" name="email" id="email" autocomplete="off" spellcheck="false" required>
             </div>
             <div class="form-field">
                 <label for="gender">Gender:</label>
@@ -38,7 +40,7 @@
                 <select name="designation" id="designation" required>
                     <option value="">Designation</option>
                     <option value="Faculty">Faculty</option>
-                    <option value="Staff">Staff</option>
+                    <option value="Staff">Student</option>
                 </select>
             </div>
             <div class="form-field">
@@ -57,9 +59,10 @@
                 <input type="checkbox" name="declaration" id="declaration" required>
                 <label for="declaration">I hereby declare that the information I have provided is valid and am aware that service could be denied in the matter of improper information.</label>
             </div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="submit-btn">
             <p>Already have an account? <a href="/auth/login">Login <i class='bx bx-link-external'></i></a></p>
         </form>
     </main>
     <script src="/js/register.js"></script>
 </body>
+</html>
