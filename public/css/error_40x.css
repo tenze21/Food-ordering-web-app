@@ -1,0 +1,56 @@
+:root {
+  --primary: #e67817;
+  --blue: #0127d1;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Open sans", serif;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 700;
+  --radius-large: 0.625rem;
+  --radius-small: 0.5rem;
+  --transition-hover: all 200ms ease-in-out;
+  --check-box: #0af40a;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    h1{
+        font-family: var(--font-secondary);
+    }
+    h3{
+        font-family: var(--font-secondary);
+    }
+    a{
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-family: var(--font-secondary);
+        position: relative;
+        color: var(--blue);
+        &::before{
+            content: '';
+            width: 0;
+            height: 2px;
+            background-color: var(--blue);
+            position: absolute;
+            top: 1.5rem;
+            transition: width 300ms ease-in-out;
+        }
+        &:hover::before{
+            width: 100%;
+        }
+    }
+}

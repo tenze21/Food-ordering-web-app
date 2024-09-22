@@ -1,11 +1,13 @@
 <%- include ('layouts/header') %>
-<link rel="stylesheet" href="error_40x.css">
+<link rel="stylesheet" href="/css/error_40x.css">
 </head>
 <body>
-    <h1>Oops... seems like there was an issue with the request.</h1>
-    <br />
-    <h3><%= error.status %> | <%= error.message %></h3>
-    <br />
-    <a href="/auth/register">← Back to home</a>
+    <main class="wrapper">
+        <h1>Oops... seems like there was an issue with the request.</h1>
+        <br />
+        <h3><%= error.status %> | <%= error.message %></h3>
+        <br />
+        <a href="/">← Back to home</a>
+    </main>
 </body>
 </html>
