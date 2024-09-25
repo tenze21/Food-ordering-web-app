@@ -3,6 +3,9 @@ const morgan= require("morgan");
 const createHttpErrors= require('http-errors');
 const connectFlash= require('connect-flash');
 const session= require('express-session');
+const passport = require("passport");
+const MongoStore = require("connect-mongo");
+const {ensureLoggedIn}= require('connect-ensure-login');
 
 const app = express();
 app.use(morgan("dev"));
@@ -18,13 +21,16 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
+        store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
         cookie: {
             // secure: true "for deployment"
             httpOnly: true, 
         }
     })
 )
-
+app.use(passport.initialize());
+app.use(passport.session());
+require("./utils/passport.auth");
 
 // Initialize connect flash
 app.use(connectFlash());
@@ -33,8 +39,8 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use('/', require('./routes/index.route'));
-app.use('/auth', require('./routes/auth.route'));
+app.use('/', require('./routes/auth.route'));
+app.use('/home', ensureLoggedIn({redirectTo: '/auth/login'}),require('./routes/index.route'));
 
 
 app.use((req,res,next)=>{
