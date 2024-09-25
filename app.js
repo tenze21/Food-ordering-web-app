@@ -3,6 +3,7 @@ const morgan= require("morgan");
 const createHttpErrors= require('http-errors');
 const connectFlash= require('connect-flash');
 const session= require('express-session');
+const passport = require("passport");
 
 const app = express();
 app.use(morgan("dev"));
@@ -24,7 +25,9 @@ app.use(
         }
     })
 )
-
+app.use(passport.initialize());
+app.use(passport.session());
+require("./utils/passport.auth");
 
 // Initialize connect flash
 app.use(connectFlash());

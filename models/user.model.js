@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const createHttpError = require('http-errors')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -60,6 +61,14 @@ userSchema.pre('save', async function (next) {
 //        }else
 //        next()
 // })
+
+userSchema.methods.isValidPassword = async function(password) {
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw createHttpError.InternalServerError(error.message)
+    }
+};
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

@@ -1,3 +1,4 @@
+const passport = require("passport");
 const User = require("../models/user.model");
 
 exports.getLogin = async (req, res, next) => {
@@ -26,5 +27,9 @@ exports.createUser = async (req, res, next) => {
 };
 
 exports.authenticateUser = async (req, res, next) => {
-  
-}
+ passport.authenticate("local", {
+  successReturnToOrRedirect: "/",
+  failureRedirect: "/auth/login",
+  failureFlash: true,
+ }) 
+};
