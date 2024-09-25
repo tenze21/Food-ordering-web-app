@@ -32,6 +32,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./utils/passport.auth");
 
+app.use((req,res,next)=>{
+    res.locals.user=req.user;
+    next();
+})
+
 // Initialize connect flash
 app.use(connectFlash());
 app.use((req,res,next)=>{
@@ -40,7 +45,7 @@ app.use((req,res,next)=>{
 })
 
 app.use('/', require('./routes/auth.route'));
-app.use('/home', ensureLoggedIn({redirectTo: '/auth/login'}),require('./routes/index.route'));
+app.use('/user', ensureLoggedIn({redirectTo: '/'}),require('./routes/user.route'));
 
 
 app.use((req,res,next)=>{

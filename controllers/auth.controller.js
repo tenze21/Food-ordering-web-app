@@ -24,3 +24,12 @@ exports.createUser = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.logout = async (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};

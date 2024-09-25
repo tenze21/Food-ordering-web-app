@@ -7,7 +7,7 @@
         
         <h1>Register</h1>
         <h2>Please provide valid data in the provided fields.</h2>
-        <form action="/auth/register" method="post" id="registration">
+        <form action="/register" method="post" id="registration">
             <div class="form-field">
                 <label for="name">Full name:</label>
                 <input type="text" name="name" id="name" autocomplete="off" spellcheck="false" autofocus required>
@@ -60,7 +60,7 @@
                 <label for="declaration">I hereby declare that the information I have provided is valid and am aware that service could be denied in the matter of improper information.</label>
             </div>
             <input type="submit" value="Submit" id="submit-btn">
-            <p>Already have an account? <a href="/auth/login">Login <i class='bx bx-link-external'></i></a></p>
+            <p>Already have an account? <a href="/">Login <i class='bx bx-link-external'></i></a></p>
         </form>
     </main>
     <script src="/js/register.js"></script>

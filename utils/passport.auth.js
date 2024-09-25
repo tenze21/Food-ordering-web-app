@@ -13,7 +13,7 @@ passport.use(
         const user = await User.findOne({ email }).select("+password");
 
         if (!user || !(await user.isValidPassword(password, user.password))) {
-          return done(null, false, { message: "Invalid Email or Password!" });
+          return done(null, false, { message: "Oops... seems like you entered wrong credentials!" });
         } else {
           return done(null, user);
         }

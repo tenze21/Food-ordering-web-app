@@ -6,7 +6,7 @@
         <%- include('./layouts/flash-message') %>
         <img src="/images/logo.png" alt="GCIT logo">
         <h1>login</h1>
-            <form action="/auth/login" method="post" id="login-form">
+            <form action="/" method="post" id="login-form">
                 <div class="form-field">
                     <input type="email" name="email" id="email" placeholder="Email" required autocomplete="off" spellcheck="false" autofocus>
                 </div>
@@ -17,7 +17,7 @@
                     <a href="#">Forgot password?</a>
                 </div>
                 <input type="submit" value="Login" id="submit-btn">
-                <p class="register-link">Don't have an account?  <a href="/auth/register">Create account <i class='bx bx-link-external'></i></a></p>
+                <p class="register-link">Don't have an account?  <a href="/register">Create account <i class='bx bx-link-external'></i></a></p>
             </form>
     </main>
     <script src="/js/login.js"></script>
