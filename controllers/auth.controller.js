@@ -1,4 +1,3 @@
-const passport = require("passport");
 const User = require("../models/user.model");
 
 exports.getLogin = async (req, res, next) => {
@@ -15,21 +14,13 @@ exports.createUser = async (req, res, next) => {
     const doesExist = await User.findOne({ email });
     if (doesExist) {
       req.flash("error", `${email} already exist. Do you want to login?`);
-      res.redirect("/auth/login");
+      res.redirect("/");
       return;
     }
     const user = await User.create(req.body);
     req.flash("success", `${user.email} registered successfully!`);
-    res.redirect("/auth/login");
+    res.redirect("/");
   } catch (err) {
     next(err);
   }
-};
-
-exports.authenticateUser = async (req, res, next) => {
- passport.authenticate("local", {
-  successReturnToOrRedirect: "/",
-  failureRedirect: "/auth/login",
-  failureFlash: true,
- }) 
 };

@@ -1,8 +1,21 @@
 const router = require("express").Router();
+const passport = require("passport");
 const authController = require("../controllers/auth.controller");
 
-router.route('/login').get(authController.getLogin).post(authController.authenticateUser);
+router
+  .route("/")
+  .get(authController.getLogin)
+  .post(
+    passport.authenticate("local", {
+      successRedirect: "/home",
+      failureRedirect: "/",
+      failureFlash: true,
+    })
+  );
 
-router.route('/register').get(authController.getRegister).post(authController.createUser);
+router
+  .route("/register")
+  .get(authController.getRegister)
+  .post(authController.createUser);
 
-module.exports= router;
+module.exports = router;

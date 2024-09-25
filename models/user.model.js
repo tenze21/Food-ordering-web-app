@@ -35,36 +35,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : true,
         minlength: 8,
-        //password wont be included when we get the users
         select: false,
     },
 })
 userSchema.pre('save', async function (next) {
-    //Only run this function if password was actually modified
     if (!this.isModified('password')) return next()
-    //Hash the password with cost of 12
     this.password = await bcrypt.hash(this.password, 12)
-    //Delete passwordConfirm field
     next()
 })
 
-// userSchema.pre('findOneAndUpdate',async function(next) {
-//     const update = this.getUpdate();
-//     if (update.password !==""&&
-//         update.password !== undefined &&
-//         update.password == update.passwordConfirm ){
-//         //Hash the password with cost of 12
-//         this.getUpdate().password = await bcrypt.hash(update.password, 12)
-//          // // Delete passwordConfirm field
-//         update.passwordConfirm = undefined
-//         next()
-//        }else
-//        next()
-// })
-
-userSchema.methods.isValidPassword = async function(password) {
+userSchema.methods.isValidPassword = async function(candidatePassword, userPassword) {
     try {
-        return await bcrypt.compare(password, this.password);
+        return await bcrypt.compare(candidatePassword, userPassword);
     } catch (error) {
         throw createHttpError.InternalServerError(error.message)
     }
