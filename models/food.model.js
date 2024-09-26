@@ -27,13 +27,7 @@ const menuSchema = new mongoose.Schema({
         default: true,
     },
 
-    category1: {
-        type: String,
-        enum: ['food', 'drinks'],
-        required: [true, 'Please specify if it is food or drinks']
-    },
-
-    category2: {
+    category: {
         type: String,
         enum: ['veg', 'nonveg'],
         required: [true, 'Please specify if it is veg or non-veg']
