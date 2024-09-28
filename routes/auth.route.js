@@ -8,7 +8,8 @@ router
   .get(ensureLoggedOut({redirectTo: "/user/home"}) ,authController.getLogin)
   .post(
     passport.authenticate("local", {
-      successRedirect: "/user/home",
+      // successRedirect: "/user/home",
+      successReturnToOrRedirect: "/admin/food",
       failureRedirect: "/",
       failureFlash: true,
     })

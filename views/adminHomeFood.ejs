@@ -1,0 +1,20 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/adminHome.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <main class="wrapper">
+        <div class="search-wrapper">
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="search recipe by name..." autocomplete="off" spellcheck="false">
+        </div>
+        <div class="category-filter">
+            <div class="d-flex">
+                <a href="#" title="food"><div class="food"><i class='bx bxs-bowl-rice'></i></div></a>
+                <div class="line"></div>
+                <a href="#" title="drinks"><div class="drinks"><i class='bx bxs-coffee'></i></div></a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

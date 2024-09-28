@@ -23,10 +23,18 @@
     max-inline-size: 100%;
     block-size: auto;
   }
-  p,a,small,input{
+  p,
+  a,
+  small,
+  input {
     font-family: "Open sans", serif;
   }
-  h1,h2,h3,h4,h5,button{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  button {
     font-family: "Playfair Display", serif;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -40,8 +48,26 @@
     }
   }
 }
+:root {
+  --primary: #e67817;
+  --blue: #0127d1;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Open sans", serif;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 700;
+  --radius-large: 0.625rem;
+  --radius-small: 0.5rem;
+  --transition-hover: all 200ms ease-in-out;
+  --check-box: #0af40a;
+}
 
-.messages_list{
+.messages_list {
   list-style: none;
   width: 50vw;
   margin: 1rem;
@@ -51,7 +77,7 @@
   @media screen and (max-width: 450px) {
     width: 98vw;
   }
-  li{
+  li {
     margin: 1rem;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -59,20 +85,62 @@
     box-shadow: 2px 2px 2px rgb(0 0 0 /0.5);
     font-size: 1rem;
     font-weight: 600;
+    cursor: default;
     @media screen and (max-width: 450px) {
       font-size: 0.8rem;
     }
   }
-  .error{
+  .error {
     background-color: #f87171;
   }
-  .success{
+  .success {
     background-color: #6ee7b7;
   }
-  .warning{
+  .warning {
     background-color: #fcd34d;
   }
-  .info{
+  .info {
     background-color: #93c5fd;
+  }
+}
+
+.navbar {
+  background-color: #000;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  .navlist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+    height: 70px;
+    div{
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-item {
+      img{
+        width: 50px;
+        height: 47px;
+      }
+      a{
+        text-decoration: none;
+        color: #fff;
+        font-family: var(--font-primary);
+        font-size: clamp(1rem, 1.8vw, 2.5rem);
+        font-weight: var(--font-weight-semi-bold);
+        transition: var(--transition-hover);
+        &:hover{
+          color: var(--primary);
+        }
+      }
+    }
+    [aria-current="page"]{
+      a{
+        color: var(--primary);
+      }
+    }
   }
 }

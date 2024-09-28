@@ -1,0 +1,74 @@
+:root {
+  --primary: #e67817;
+  --blue: #0127d1;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Open sans", serif;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 700;
+  --radius-large: 0.625rem;
+  --radius-small: 0.5rem;
+  --transition-hover: all 200ms ease-in-out;
+  --check-box: #0af40a;
+  --body-bg: #eaeaea;
+}
+
+body {
+  background-color: var(--body-bg);
+}
+
+.wrapper {
+  .search-wrapper {
+    position: relative;
+    margin-top: 2rem;
+    display: block;
+    margin-inline: auto;
+    width: 400px;
+    input {
+      width: 400px;
+      height: 45px;
+      padding-left: 2.5rem;
+      border-radius: 100px;
+      border: none;
+      outline: none;
+      box-shadow: 4px 4px 4px rgb(0 0 0 /0.25);
+    }
+    .bx-search {
+      position: absolute;
+      left: 0.7rem;
+      top: 0.7rem;
+      font-size: 1.5rem;
+    }
+  }
+  .category-filter{
+    display: block;
+    margin-inline: auto;
+    border-radius: 100px;
+    margin-top: 1.5rem;
+    background-color: #fff;
+    width: 200px;
+    height: 40px;
+    padding: 0 1rem;
+    .line{
+        height: 30px;
+        width: 2px;
+        background-color: #000;
+    }
+    .bx{
+        font-size: 1.5rem;
+        color: #000;
+    }
+    .d-flex{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        justify-content: space-around;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<nav class="navbar">
+  <ul class="navlist">
+    <div class="nav-brand">
+      <li class="nav-item"><img src="/images/logo.png" alt="logo" /></li>
+    </div>
+    <% if (user.role==="admin") { %>
+      <div class="nav-wrapper">
+        <li class="nav-item"><a href="/admin">Home</a></li>
+        <li class="nav-item"><a href="#">Reservations</a></li>
+        <li class="nav-item"><a href="#">Reviews</a></li>
+        <li class="nav-item"><a href="#">Orders</a></li>
+      </div>
+      <div class="side-nav">
+        <li class="nav-item"><a href="/logout">logout</a></li>
+      </div>
+    <% }else{%>
+      <div class="nav-wrapper">
+        <li class="nav-item" aria-current="page"><a href="#">Home</a></li>
+        <li class="nav-item"><a href="#">Reservation</a></li>
+        <li class="nav-item"><a href="#">Reviews</a></li>
+        <li class="nav-item"><a href="#">Orders</a></li>
+      </div>
+      <div class="side-nav">
+        <li class="nav-item"><a href="#">Profile</a></li>
+        <li class="nav-item"><a href="/logout">logout</a></li>
+      </div>
+    <% } %>
+  </ul>
+</nav>
