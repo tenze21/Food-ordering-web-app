@@ -1,8 +1,24 @@
 const router = require("express").Router();
+const passport = require("passport");
 const authController = require("../controllers/auth.controller");
+const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
-router.route('/login').get(authController.getLogin).post(authController.authenticateUser);
+router
+  .route("/")
+  .get(ensureLoggedOut({redirectTo: "/user/home"}) ,authController.getLogin)
+  .post(
+    passport.authenticate("local", {
+      successRedirect: "/user/home",
+      failureRedirect: "/",
+      failureFlash: true,
+    })
+  );
 
-router.route('/register').get(authController.getRegister).post(authController.createUser);
+router
+  .route("/register")
+  .get(ensureLoggedOut({redirectTo: "/user/home"}) ,authController.getRegister)
+  .post(authController.createUser);
 
-module.exports= router;
+router.get("/logout", ensureLoggedIn({ redirectTo: "/" }),authController.logout);
+
+module.exports = router;

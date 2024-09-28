@@ -94,6 +94,10 @@ h1 {
         background-color: #000;
         color: var(--primary);
       }
+      &:disabled{
+        background-color: #000;
+        color: var(--primary);
+      }
     }
   }
 }

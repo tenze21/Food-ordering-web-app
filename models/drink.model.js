@@ -1,20 +1,20 @@
 const mongoose = require('mongoose')
 
-const menuSchema = new mongoose.Schema({
+const drinkSchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: [true ],
+        required: true ,
     },
 
     description: {
         type: String,
-        required: [true ],
+        required: true ,
     },
 
     price: {
         type: Number,
-        required: [true ],
+        required: true ,
     },
 
     images: {
@@ -26,7 +26,8 @@ const menuSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
     }
+
 });
 
-const Menu = mongoose.model('Menu', menuSchema);
-module.exports = Menu;
+const Drink = mongoose.model('Drink', drinkSchema);
+module.exports = Drink;
