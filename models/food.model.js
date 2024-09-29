@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const menuSchema = new mongoose.Schema({
+const foodSchema = new mongoose.Schema({
 
     title: {
         type: String,
@@ -9,16 +9,18 @@ const menuSchema = new mongoose.Schema({
 
     description: {
         type: String,
-        required: true ,
+        required: true,
     },
 
     price: {
         type: Number,
-        required: true ,
+        required: true,
+        default: 0
     },
 
     images: {
         type: String,
+        required: true,
         default: 'default.jpg'
     },
 
@@ -30,10 +32,10 @@ const menuSchema = new mongoose.Schema({
     category: {
         type: String,
         enum: ['veg', 'nonveg'],
-        required: [true, 'Please specify if it is veg or non-veg']
+        required: true
     }
 
 });
 
-const Menu = mongoose.model('Menu', menuSchema);
-module.exports = Menu;
+const Food = mongoose.model('Food', foodSchema);
+module.exports = Food;

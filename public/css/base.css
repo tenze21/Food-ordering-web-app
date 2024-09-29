@@ -108,6 +108,7 @@
   background-color: #000;
   padding: 0 2rem;
   position: sticky;
+  z-index: 10;
   top: 0;
   .navlist {
     display: flex;
@@ -135,12 +136,48 @@
         &:hover{
           color: var(--primary);
         }
+        &:active{
+          color: var(--primary);
+        }
       }
     }
     [aria-current="page"]{
       a{
         color: var(--primary);
       }
+    }
+  }
+}
+footer{
+  background-color: #000;
+  padding: 1.5rem 2rem;
+  .d-flex{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    img{
+      width: 202px;
+      height: 185px;
+    }
+    .details{
+      p{
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        a{
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .copy{
+    p{
+      color: #fff;
+      text-align: center;
+      margin-top: 1rem;
     }
   }
 }
