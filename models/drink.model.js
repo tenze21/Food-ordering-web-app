@@ -29,7 +29,9 @@ const drinkSchema = new mongoose.Schema({
         default: true,
     }
 
+},{
+    timestamps: true
 });
 
-const Drink = mongoose.model('Drink', drinkSchema);
-module.exports = Drink;
+const Drinks = mongoose.model('Drinks', drinkSchema);
+module.exports = Drinks;

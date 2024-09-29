@@ -56,6 +56,8 @@ app.use(
   require("./routes/admin.route")
 );
 
+app.use("/menu", require("./routes/menu.route"));
+
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());
 });

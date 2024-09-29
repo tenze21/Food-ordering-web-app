@@ -6,7 +6,7 @@
     <main class="wrapper">
         <div class="search-wrapper">
             <i class='bx bx-search'></i>
-            <input type="text" placeholder="search recipe by name..." autocomplete="off" spellcheck="false">
+            <input type="text" placeholder="search recipe by name..." id="search-input" autocomplete="off" spellcheck="false">
         </div>
         <div class="category-filter">
             <div class="d-flex">
@@ -18,8 +18,10 @@
         <div class="add-menu">
             <a href="#">Add Recipe</a>
         </div>
-        <div class="menu-wrapper"></div>
+        <div class="menu-wrapper">
+        </div>
     </main>
     <%- include('./layouts/footer')  %>
+    <script src="/js/adminDrinks.js"></script>
 </body>
 </html>

@@ -1,5 +1,23 @@
+const Food= require('../models/food.model');
 const Drink= require('../models/drink.model');
-const Food = require('../models/food.model');
+
+exports.getFood= async(req,res,next)=>{
+  try {
+      const foods = await Food.find();
+      res.status(200).json(foods);
+  } catch (error) {
+      next(error);
+  }
+}
+
+exports.getDrinks= async(req,res,next)=>{
+  try {
+      const drinks = await Drink.find();
+      res.status(200).json(drinks);
+  } catch (error) {
+      next(error);
+  }
+}
 
 
 //Update a drink

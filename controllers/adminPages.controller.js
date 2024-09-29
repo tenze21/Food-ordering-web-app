@@ -1,7 +1,8 @@
-exports.getFood = (req,res,next)=>{
+
+exports.getFoodPage = async(req,res,next)=>{
     res.render("adminHomeFood");
 }
 
-exports.getDrinks= (req, res, next)=>{
-    res.render("adminHomeDrinks")
+exports.getDrinksPage = async(req, res, next)=>{
+    res.render("adminHomeDrinks");
 }
