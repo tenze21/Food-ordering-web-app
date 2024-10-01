@@ -66,7 +66,11 @@ app.use((error, req, res, next) => {
   error.status = error.status || 500;
   res.status(error.status);
   res.render("error_40x", { error });
+  console.log(error);
 });
+
+// app.use('/api/food', foodRoutes);
+// app.use('/api/drink', drinkRoutes);
 
 function ensureAdmin(req, res, next) {
   if (req.user.role === "admin") {
