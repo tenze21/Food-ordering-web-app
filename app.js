@@ -57,7 +57,7 @@ app.use(
   require("./routes/admin.route")
 );
 
-app.use("/menu", require("./routes/menu.route"));
+app.use("/menu", ensureLoggedIn({ redirectTo: "/" }), require("./routes/menu.route"));
 
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());
