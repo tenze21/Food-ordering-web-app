@@ -40,7 +40,7 @@ function showFood(food) {
     wrapper.innerHTML += `
         <div class="card">
             <a href="/admin/food/${food._id}">
-                <div class="img"><img src="${food.images}" alt="${food.name}"></div>
+                <div class="img"><img src="${food.images}" alt="${food.title}"></div>
                 <div class="details">
                     <h2 class="title">${food.title}</h2>
                     <p class="description">${food.description}</p>
