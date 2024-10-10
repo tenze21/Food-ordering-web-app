@@ -47,10 +47,10 @@ function showDrink(drink) {
             </div>
             <div class="cta">
                 <div class="cart">
-                    <button><i class='bx bx-cart'></i></button> 
+                    <button onclick="openCartDialog('${drink.images}', '${drink.title}', ${drink.price}, '${drink.description}', '${drink._id}')"><i class='bx bx-cart'></i></button> 
                 </div>
                 <div class="order-btn">
-                    <button onclick="openOrderDialog('${drink.images}', '${drink.title}', ${drink.price})">Order Now</button>
+                    <button onclick="openOrderDialog('${drink.images}', '${drink.title}', ${drink.price}, '${drink.description}')">Order Now</button>
                 </div>
             </div>
         </div>
@@ -80,25 +80,143 @@ function showDrink(drink) {
   }
 }
 
-function openOrderDialog(drinkImage, drinkTitle, drinkPrice) {
+function openOrderDialog(drinkImage, drinkTitle, drinkPrice, drinkDescription) {
   const dialog = document.createElement('dialog');
+  dialog.classList.add("order-dialog");
   dialog.innerHTML = `
     <form method="dialog">
-      <h2>Order ${drinkTitle}</h2>
       <div class="img-wrapper">
         <img src=${drinkImage} alt=${drinkTitle}/>
       </div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity" min="1" required>
-      <label for="address">Delivery Address:</label>
-      <input type="text" id="address" name="address" required>
-      <p>Total Price: Nu. ${drinkPrice}</p>
-      <button type="submit">Submit Order</button>
-      <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
-    </form>
+      <div class="food-info">
+        <h2>${drinkTitle}</h2>
+        <p>${drinkDescription}</p>
+      </div>
+      <div class="form-fields">
+        <div class="form-field">
+          <label for="quantity">Quantity:</label>
+          <select id="quantity" name="quantity" required onchange="updateTotalPrice()">
+            <option value="1" selected>1 (Nu. ${drinkPrice})</option>
+            <option value="2">2 (Nu. ${drinkPrice * 2})</option>
+            <option value="3">3 (Nu. ${drinkPrice * 3})</option>
+            <option value="4">4 (Nu. ${drinkPrice * 4})</option>
+            <option value="5">5 (Nu. ${drinkPrice * 5})</option>
+            <option value="6">6 (Nu. ${drinkPrice * 6})</option>
+            <option value="7">7 (Nu. ${drinkPrice * 7})</option>
+            <option value="8">8 (Nu. ${drinkPrice * 8})</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="instructions">Special Instructions:</label>
+          <textarea type="text" id="instructions" name="instructions"></textarea>
+        </div>
+        <div class="payment">
+          <p>Payment:</p>
+          <div class="d-flex">
+            <div class="account-number">
+              <p>210815175</p>
+              <button data-copy="210815175" class="copy-btn" type="button" onclick="copyAccountNumber()" title="copy"><i class='bx bx-copy'></i></button>
+            </div>
+            <input type="number" name="journalNumber" placeholder="Journal Number" required>
+          </div>
+        </div>
+        <div class="btns">
+        <button type="submit">Submit Order</button>
+        <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        </div>
+      </div>
+      </form>
   `;
   document.body.appendChild(dialog);
   dialog.showModal();
+};
+
+function openCartDialog(drinkImage, drinkTitle, drinkPrice, drinkDescription, drinkId) {
+  const dialog = document.createElement('dialog');
+  dialog.classList.add("order-dialog");
+  dialog.innerHTML = `
+    <form method="dialog" class="cart-form" onSubmit="addToCart('${drinkImage}', '${drinkTitle}', '${drinkPrice}', '${drinkDescription}', '${drinkId}', this)">
+      <div class="img-wrapper">
+        <img src=${drinkImage} alt=${drinkTitle}/>
+      </div>
+      <div class="food-info">
+        <h2>${drinkTitle}</h2>
+        <p>${drinkDescription}</p>
+      </div>
+      <div class="form-fields">
+        <div class="form-field">
+          <label for="quantity">Quantity:</label>
+          <select id="quantity" name="quantity" required onchange="updateTotalPrice()">
+            <option value="1" selected>1 (Nu. ${drinkPrice})</option>
+            <option value="2">2 (Nu. ${drinkPrice * 2})</option>
+            <option value="3">3 (Nu. ${drinkPrice * 3})</option>
+            <option value="4">4 (Nu. ${drinkPrice * 4})</option>
+            <option value="5">5 (Nu. ${drinkPrice * 5})</option>
+            <option value="6">6 (Nu. ${drinkPrice * 6})</option>
+            <option value="7">7 (Nu. ${drinkPrice * 7})</option>
+            <option value="8">8 (Nu. ${drinkPrice * 8})</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="instructions">Special Instructions:</label>
+          <textarea type="text" id="instructions" name="instructions"></textarea>
+        </div>
+        <div class="btns">
+        <button type="submit">Add To Cart</button>
+        <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        </div>
+      </div>
+      </form>
+  `;
+  document.body.appendChild(dialog);
+  dialog.showModal();
+};
+
+function addToCart(drinkImage, drinkTitle, drinkPrice, drinkDescription, drinkId, form) {
+  const quantity = parseInt(form.querySelector('select[name="quantity"]').value);
+  const instructions = form.querySelector('textarea[name="instructions"]').value;
+  const drinkItem = {
+    id: drinkId,
+    image: drinkImage,
+    title: drinkTitle,
+    price: drinkPrice,
+    description: drinkDescription,
+    quantity,
+    totalPrice: drinkPrice * quantity,
+    instructions,
+  };
+
+  let cart = JSON.parse(localStorage.getItem("drinkCart")) || [];
+  const existingItemIndex = cart.findIndex(item => item.id === drinkId);
+
+  if (existingItemIndex > -1) {
+    // If the item already exists in the cart, update its quantity and total price
+    cart[existingItemIndex].quantity += quantity;
+    cart[existingItemIndex].totalPrice += drinkPrice * quantity;
+    cart[existingItemIndex].instructions = instructions; // Update instructions
+  } else {
+    // If the item does not exist, add it to the cart
+    cart.push(drinkItem);
+  }
+
+  localStorage.setItem("drinkCart", JSON.stringify(cart));
+  showMessage(drinkTitle);
 }
+// Copy Account Number
+function copyAccountNumber(){
+  const copiedText = document.querySelector(".copy-btn").dataset.copy;
+  navigator.clipboard.writeText(copiedText);
+};
+
+const hideAlert=()=>{
+  const el=document.querySelector('.message');
+  if(el) el.parentElement.removeChild(el)
+};
+
+// type is success or error
+const showMessage=(item)=>{
+  hideAlert();
+  const markup= `<div class="message">${item} added to cart!</div>`;
+  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  window.setTimeout(hideAlert, 3000);
+};
