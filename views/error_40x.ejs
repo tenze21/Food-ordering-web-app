@@ -9,6 +9,9 @@
         <br />
         <% if (user) { %>
             <a href="/user/home">← Back to home</a>
+            <% if (user.role === 'admin') { %>
+                <a href="/admin/food">← Back Admin home</a>
+            <% } %>
         <% }else{%>
             <a href="/">← Back to Login</a>
         <% } %>

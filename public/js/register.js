@@ -6,11 +6,13 @@ const nameEl = document.getElementById("name");
 const contactNumberEl = document.getElementById("contactNumber");
 const form = document.getElementById("registration");
 const submitBtn= document.getElementById("submit-btn");
+const emailEl = document.getElementById("email");
 
 let isNameValid = false;
 let isContactNumberValid = false;
 let isPasswordSecure = false;
 let isConfirmPasswordValid = false;
+let isEmailValid = false;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -19,7 +21,8 @@ form.addEventListener("submit", (e) => {
     isNameValid &&
     isContactNumberValid &&
     isPasswordSecure &&
-    isConfirmPasswordValid;
+    isConfirmPasswordValid &&
+    isEmailValid;
   if (isFormValid) {
     form.submit();
   }
@@ -48,7 +51,17 @@ nameEl.addEventListener("input", () => {
     isNameValid = true;
   }
 });
+emailEl.addEventListener("input", () => {
+  const email = emailEl.value.trim();
+  const re = /^[0-9]{8}\.gcit@rub\.edu\.bt$/;
 
+  if (!re.test(email) && email !== "") {
+    showError(emailEl, "Email must be your college email");
+  } else {
+    hideError(emailEl);
+    isEmailValid = true;
+  }
+});
 passwordEl.addEventListener("input", () => {
   const password = passwordEl.value.trim();
   const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;

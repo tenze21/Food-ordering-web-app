@@ -14,11 +14,13 @@ const drinkSchema = new mongoose.Schema({
 
     price: {
         type: Number,
-        required: true ,
+        required: true,
+        default: 0
     },
 
     images: {
         type: String,
+        required: true,
         default: 'default.jpg'
     },
 
@@ -27,7 +29,9 @@ const drinkSchema = new mongoose.Schema({
         default: true,
     }
 
+},{
+    timestamps: true
 });
 
-const Drink = mongoose.model('Drink', drinkSchema);
-module.exports = Drink;
+const Drinks = mongoose.model('Drinks', drinkSchema);
+module.exports = Drinks;
