@@ -16,18 +16,18 @@ app.use(express.static("public"));
 
 // Initialize session
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-            // secure: true "for deployment"
-            httpOnly: true, 
-        }
-    })
-)
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    cookie: {
+      // secure: true "for deployment"
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      httpOnly: true,
+    },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 require("./utils/passport.auth");
@@ -57,7 +57,7 @@ app.use(
   require("./routes/admin.route")
 );
 
-app.use("/menu", require("./routes/menu.route"));
+app.use("/menu", ensureLoggedIn({ redirectTo: "/" }), require("./routes/menu.route"));
 
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());

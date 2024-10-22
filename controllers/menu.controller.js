@@ -20,6 +20,16 @@ exports.getDrinks = async (req, res, next) => {
   }
 };
 
+// get add food page
+exports.getAddFoodPage = async (req, res) => {
+  res.render('addFood');
+}
+
+// get add drink page
+exports.getAddDrinkPage = async (req, res) => {
+  res.render('addDrinks');
+}
+
 // Add Food Item
 exports.addFood = async (req, res, next) => {
   try {
