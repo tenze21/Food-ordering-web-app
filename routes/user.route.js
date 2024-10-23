@@ -1,10 +1,11 @@
 const router= require('express').Router();
-const {getHome, getDrinks, getCart}= require('../controllers/userPages.controller');
-const {getUserOrder, placeOrder}= require('../controllers/orderApi.controller');
+const { getProfile } = require('../controllers/auth.controller');
+const {getHome, getDrinks, getCart}= require('../controllers/userPages.controller')
 
+// Route for the home page
 router.get('/home', getHome);
 router.get('/drinks', getDrinks);
 router.get('/cart', getCart);
-router.route('/order').get(getUserOrder).post(placeOrder);
+router.get('/profile', getProfile)
 
 module.exports= router;

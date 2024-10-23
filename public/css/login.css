@@ -22,7 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: var(--primary);
+  background-color:rgb(110, 110, 110);
 }
 
 h1 {
