@@ -58,10 +58,12 @@ deleteBtn.forEach((btn) => {
     fetch(`/admin/order/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-    }).catch((err) => {
+    }).then(()=>{
+      location.reload();
+    }).
+    catch((err) => {
       showUpdateError(err);
     });
-    location.reload();
   });
 });
 

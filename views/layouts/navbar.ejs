@@ -18,7 +18,7 @@
         <li class="nav-item home" aria-current="page"><a href="/user/home">Home</a></li>
         <li class="nav-item reservation"><a href="#">Reservation</a></li>
         <li class="nav-item reviews"><a href="#">Reviews</a></li>
-        <li class="nav-item orders-nav"><a href="/user/order">Orders</a></li>
+        <li class="nav-item orders-nav"><a href="/user/orders">Orders</a></li>
       </div>
       <div class="side-nav">
         <li class="nav-item cart">
@@ -31,8 +31,8 @@
     <% } %>
   </ul>
   <script>
-    const foodsNav= JSON.parse(localStorage.getItem("foodCart")) || "[]";
-    const drinksNav=JSON.parse(localStorage.getItem("drinkCart")) || "[]";
+    const foodsNav= JSON.parse(localStorage.getItem("foodCart")) || [];
+    const drinksNav=JSON.parse(localStorage.getItem("drinkCart")) || [];
     const numDisplay= document.getElementById("item-numbers");
     const numFoods= foodsNav.reduce(
       (total, food) => total + food.quantity,

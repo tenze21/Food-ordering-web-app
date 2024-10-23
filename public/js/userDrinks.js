@@ -274,7 +274,7 @@ function placeOrder() {
     totalPrice: totalPrice,
   };
 
-  fetch("/user/order", {
+  fetch("/user/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
