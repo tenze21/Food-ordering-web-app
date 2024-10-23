@@ -1,0 +1,27 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <main class="wrapper">
+        <h1>My Cart</h1>
+        <hr/>
+        <section class="food">
+            <h2>Food</h2>
+            <div class="foods-container">
+                <p class="empty-cart">No food items in cart</p>
+            </div>
+        </section>
+        <hr/>
+        <section class="drinks">
+            <h2>Drinks</h2>
+            <div class="drinks-container">
+                <p class="empty-cart">No drinks items in cart</p>
+            </div>
+        </section>
+        <button class="checkout-btn">Checkout  <span>Nu.<span class="total-payment">0</span></span><button>
+    </main>
+    <%- include('./layouts/footer')  %>
+    <script src="/js/cart.js"></script>
+</body>
+</html>

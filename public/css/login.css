@@ -97,6 +97,7 @@ h1 {
       &:disabled{
         background-color: #000;
         color: var(--primary);
+        cursor: not-allowed;
       }
     }
   }

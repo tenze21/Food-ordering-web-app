@@ -23,6 +23,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       // secure: true "for deployment"
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
       httpOnly: true,
     },
   })
@@ -56,7 +57,7 @@ app.use(
   require("./routes/admin.route")
 );
 
-app.use("/menu", require("./routes/menu.route"));
+app.use("/menu", ensureLoggedIn({ redirectTo: "/" }), require("./routes/menu.route"));
 
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());
@@ -69,6 +70,7 @@ app.use((error, req, res, next) => {
   console.log(error);
 });
 
+app.use('/images', express.static(''))
 // app.use('/api/food', foodRoutes);
 // app.use('/api/drink', drinkRoutes);
 
