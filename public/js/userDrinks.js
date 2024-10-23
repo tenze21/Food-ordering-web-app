@@ -221,6 +221,7 @@ function addToCart(
   }
 
   localStorage.setItem("drinkCart", JSON.stringify(cart));
+  location.reload();
   showMessage(drinkTitle);
 }
 // Copy Account Number

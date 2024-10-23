@@ -19,12 +19,29 @@
         <li class="nav-item reservation"><a href="#">Reservation</a></li>
         <li class="nav-item reviews"><a href="#">Reviews</a></li>
         <li class="nav-item orders-nav"><a href="/user/order">Orders</a></li>
-        <li class="nav-item cart"><a href="/user/cart">Cart</a></li>
       </div>
       <div class="side-nav">
+        <li class="nav-item cart">
+          <a href="/user/cart"><i class='bx bx-cart'></i></a>
+          <span id="item-numbers"></span>
+        </li>
         <li class="nav-item"><a href="#">Profile</a></li>
         <li class="nav-item"><a href="/logout">logout</a></li>
       </div>
     <% } %>
   </ul>
+  <script>
+    const foodsNav= JSON.parse(localStorage.getItem("foodCart")) || "[]";
+    const drinksNav=JSON.parse(localStorage.getItem("drinkCart")) || "[]";
+    const numDisplay= document.getElementById("item-numbers");
+    const numFoods= foodsNav.reduce(
+      (total, food) => total + food.quantity,
+      0
+    );
+    const numDrinks= drinksNav.reduce(
+      (total, drink) => total + drink.quantity,
+      0
+    );
+    numDisplay.textContent = numFoods + numDrinks;
+  </script>
 </nav>

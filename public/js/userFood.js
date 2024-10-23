@@ -245,6 +245,7 @@ function addToCart(
   }
 
   localStorage.setItem("foodCart", JSON.stringify(cart));
+  location.reload();
   showMessage(foodTitle);
 }
 

@@ -26,6 +26,7 @@ function removeItemFromCart(itemType, index) {
   }
   updateCartDisplay();
   updateTotalPrice();
+  location.reload();
 }
 
 function updateCartDisplay() {
