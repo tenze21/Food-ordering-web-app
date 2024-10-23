@@ -5,10 +5,10 @@
     </div>
     <% if (user.role==="admin") { %>
       <div class="nav-wrapper">
-        <li class="nav-item"><a href="/admin/food">Home</a></li>
-        <li class="nav-item"><a href="#">Reservations</a></li>
-        <li class="nav-item"><a href="#">Reviews</a></li>
-        <li class="nav-item"><a href="#">Orders</a></li>
+        <li class="nav-item home"><a href="/admin/food">Home</a></li>
+        <li class="nav-item reservation"><a href="#">Reservations</a></li>
+        <li class="nav-item reviews"><a href="#">Reviews</a></li>
+        <li class="nav-item orders-nav"><a href="/admin/orders">Orders</a></li>
       </div>
       <div class="side-nav">
         <li class="nav-item"><a href="/logout">logout</a></li>
@@ -18,7 +18,7 @@
         <li class="nav-item home" aria-current="page"><a href="/user/home">Home</a></li>
         <li class="nav-item reservation"><a href="#">Reservation</a></li>
         <li class="nav-item reviews"><a href="#">Reviews</a></li>
-        <li class="nav-item orders"><a href="#">Orders</a></li>
+        <li class="nav-item orders-nav"><a href="/user/order">Orders</a></li>
         <li class="nav-item cart"><a href="/user/cart">Cart</a></li>
       </div>
       <div class="side-nav">

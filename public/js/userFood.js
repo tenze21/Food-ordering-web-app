@@ -12,7 +12,6 @@ function getFood() {
     .then((data) => {
       data.forEach((food) => {
         foods.push(food);
-        console.log(food);
       });
       wrapper.innerHTML = "";
       foods.forEach((food) => showFood(food));
@@ -57,12 +56,14 @@ function showFood(food) {
                 <div class="cart">
                     <button onClick="openCartDialog('${food.images}', '${
       food.title
-    }', ${food.price}, '${food.description}', '${food._id}')"><i class='bx bx-cart'></i></button> 
+    }', ${food.price}, '${food.description}', '${
+      food._id
+    }')"><i class='bx bx-cart'></i></button> 
                 </div>
                 <div class="order-btn">
                     <button onclick="openOrderDialog('${food.images}', '${
       food.title
-    }', ${food.price}, '${food.description}')">Order Now</button>
+    }', ${food.price}, '${food.description}', '${food._id}')">Order Now</button>
                 </div>
             </div>
         </div>
@@ -98,18 +99,27 @@ function showFood(food) {
   }
 }
 
-function openOrderDialog(foodImage, foodTitle, foodPrice, foodDescription) {
+function openOrderDialog(
+  foodImage,
+  foodTitle,
+  foodPrice,
+  foodDescription,
+  foodId
+) {
   const dialog = document.createElement("dialog");
   dialog.classList.add("order-dialog");
   dialog.innerHTML = `
-      <form method="dialog">
+      <form method="dialog" class="order-form" onSubmit="placeOrder()">
       <div class="img-wrapper">
-        <img src=${foodImage} alt=${foodTitle}/>
+        <img src=${foodImage} alt=${foodTitle} id="food-img"/>
       </div>
       <div class="food-info">
         <h2>${foodTitle}</h2>
         <p>${foodDescription}</p>
+        <p hidden aria-hidden="true" id="foodPrice">${foodPrice}</p>
       </div>
+      <input type="text" id="food-name" value="${foodTitle}" hidden/>
+      <input type="text" id="food-id" value="${foodId}" hidden/>
       <div class="form-fields">
         <div class="form-field">
           <label for="quantity">Quantity:</label>
@@ -135,7 +145,7 @@ function openOrderDialog(foodImage, foodTitle, foodPrice, foodDescription) {
               <p>210815175</p>
               <button data-copy="210815175" class="copy-btn" type="button" onclick="copyAccountNumber()" title="copy"><i class='bx bx-copy'></i></button>
             </div>
-            <input type="number" name="journalNumber" placeholder="Journal Number" required>
+            <input type="number" id="journal-number" name="journalNumber" placeholder="Journal Number" required>
           </div>
         </div>
         <div class="btns">
@@ -161,11 +171,11 @@ function openCartDialog(
   dialog.innerHTML = `
       <form method="dialog" class="food-cart-from" onSubmit="addToCart('${foodImage}', '${foodTitle}', '${foodPrice}', '${foodDescription}', '${foodId}', this)">
       <div class="img-wrapper">
-        <img src=${foodImage} alt=${foodTitle}/>
+      <img src=${foodImage} alt=${foodTitle}/>
       </div>
       <div class="food-info">
-        <h2>${foodTitle}</h2>
-        <p>${foodDescription}</p>
+      <h2>${foodTitle}</h2>
+      <p>${foodDescription}</p>
       </div>
       <div class="form-fields">
         <div class="form-field">
@@ -196,10 +206,22 @@ function openCartDialog(
   dialog.showModal();
 }
 
-function addToCart(foodImage, foodTitle, foodPrice, foodDescription, foodId, form) {
-  const quantity = parseInt(form.querySelector('select[name="quantity"]').value);
-  const instructions = form.querySelector('textarea[name="instructions"]').value;
+function addToCart(
+  foodImage,
+  foodTitle,
+  foodPrice,
+  foodDescription,
+  foodId,
+  form
+) {
+  const quantity = parseInt(
+    form.querySelector('select[name="quantity"]').value
+  );
+  const instructions = form.querySelector(
+    'textarea[name="instructions"]'
+  ).value;
   const foodItem = {
+    type:"food",
     id: foodId,
     image: foodImage,
     title: foodTitle,
@@ -211,7 +233,7 @@ function addToCart(foodImage, foodTitle, foodPrice, foodDescription, foodId, for
   };
 
   let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
-  const existingItemIndex = cart.findIndex(item => item.id === foodId);
+  const existingItemIndex = cart.findIndex((item) => item.id === foodId);
 
   if (existingItemIndex > -1) {
     // If the item already exists in the cart, update its quantity and total price
@@ -232,15 +254,65 @@ function copyAccountNumber() {
   navigator.clipboard.writeText(copiedText);
 }
 
-const hideAlert=()=>{
-  const el=document.querySelector('.message');
-  if(el) el.parentElement.removeChild(el)
+const hideAlert = () => {
+  const el = document.querySelector(".message");
+  if (el) el.parentElement.removeChild(el);
 };
 
 // type is success or error
-const showMessage=(item)=>{
+const showMessage = (item) => {
   hideAlert();
-  const markup= `<div class="message">${item} added to cart!</div>`;
-  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  const markup = `<div class="message">${item} added to cart!</div>`;
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
   window.setTimeout(hideAlert, 3000);
+};
+
+// Handle order placement
+// get form data
+// POST /user/order
+function placeOrder(){
+  const quantity = Number(document.getElementById("quantity").value);
+  const instructions = document.getElementById("instructions").value.trim();
+  const journalNumber = document.getElementById("journal-number").value.trim();
+  const imagePath= document.getElementById("food-img").src;
+  const image= imagePath.substring(imagePath.indexOf("/images"));
+  const price = Number(document.getElementById("foodPrice").textContent);
+  const foodName= document.getElementById("food-name").value.trim();
+  const foodId= document.getElementById("food-id").value.trim();
+  const totalPrice = quantity * price;
+
+  const data = {
+    orderItems: [
+      {
+        type: "food",
+        _id: foodId,
+        name: foodName,
+        image: image,
+        quantity: quantity,
+        specialInstructions: instructions,
+      },
+    ],
+    journalNumber: journalNumber,
+    totalPrice: totalPrice,
+  };
+
+  fetch("/user/order", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data),
+  }).then(()=>showOrderSuccess())
+  .catch(err=>console.error("Error:", err));
+};
+
+const hideOrderSuccess = () => {
+  const el = document.querySelector(".order-success");
+  if (el) el.parentElement.removeChild(el);
+};
+
+// type is success or error
+const showOrderSuccess = () => {
+  hideOrderSuccess();
+  const markup = `<div class="order-success">Your order has been placed successfully!</div>`;
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+  window.setTimeout(hideOrderSuccess, 3000);
 };

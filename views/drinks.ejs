@@ -4,6 +4,7 @@
 <body>
     <%- include('./layouts/navbar') %>
     <main class="wrapper">
+        <p id="userId" hidden aria-hidden="true"><%= user._id %></p>
         <div class="search-wrapper">
             <i class='bx bx-search'></i>
             <input type="text" placeholder="search recipe by name..." id="search-input" autocomplete="off" spellcheck="false">

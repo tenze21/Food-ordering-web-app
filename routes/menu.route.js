@@ -12,10 +12,10 @@ router
   .post(menuController.addDrink);
 
 //Routes for drinks
-router.put("/drinks/:id", menuController.updateDrink);
+router.put("/drinks/:id",ensureAdmin, menuController.updateDrink);
 
 //Routes for food menu
-router.put("/food/:id", menuController.updateFood);
+router.put("/food/:id", ensureAdmin, menuController.updateFood);
 
 function ensureAdmin(req, res, next) {
   if (req.user.role === "admin") {
@@ -24,5 +24,6 @@ function ensureAdmin(req, res, next) {
     res.redirect("/user/home");
   }
 }
+
 
 module.exports = router;
