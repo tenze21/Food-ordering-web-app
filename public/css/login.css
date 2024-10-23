@@ -1,5 +1,5 @@
 :root {
-  --primary: rgb(110, 110, 110);
+  --primary: #e67817;
   --blue: #0127d1;
   --font-primary: "Playfair Display", serif;
   --font-secondary: "Open sans", serif;
@@ -22,7 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: var(--primary);
+  background-color:rgb(110, 110, 110);
 }
 
 h1 {
