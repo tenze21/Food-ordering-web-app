@@ -1,5 +1,5 @@
 <%- include('./layouts/header') %>
-<link rel="stylesheet" href="/css/userProfile.css">
+    <link rel="stylesheet" href="/css/userProfile.css">
 
     </head>
 
@@ -7,8 +7,8 @@
         <main class="wrapper">
             <%- include('./layouts/flash-message') %>
                 <title>Edit Profile</title>
-                
-                  <div class="profile-header">
+
+                <div class="profile-header">
                     <div class="profile-picture-container">
                         <img src="<%= user.profilePicture || '/' %>" alt="Profile Picture" class="profile-picture"
                             id="profile-image">
@@ -47,11 +47,17 @@
                             <option value="other" <%=user.gender==='other' ? 'selected' : '' %>>Other</option>
                         </select>
                     </div>
-                    <input type="file" id="profile-pic" name="profile-pic" accept="image/*" style="display: none;">
-                    <div class="submit-button">
-                        <h1>Update Profile</h1>
-                    </div>
+                    <!-- <input type="file" id="profile-pic" name="profile-pic" accept="image/*" style="display: none;"> -->
+                    
+
                 </form>
+                
+                <div>
+                    <button type="submit" class="submit-button">
+                        Update Profile
+                    </button>
+                </div>
+                
         </main>
 
         <script src="/js/userProfile.js"></script>

@@ -94,9 +94,13 @@
                     }
 
                     .submit-button {
+                        display: flex;
                         grid-column: 1 / -1;
                         text-align: center;
-                        margin-top: 2rem;
+                        justify-content: center;
+                        margin-top: 40px;
+                        padding: 10px 20px;
+                        align-items: center;
                     }
 
                     .submit-button button {
