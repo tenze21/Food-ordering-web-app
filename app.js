@@ -70,7 +70,7 @@ app.use((error, req, res, next) => {
   console.log(error);
 });
 
-app.use('/images', express.static(''))
+// app.use('/images', express.static(''))
 // app.use('/api/food', foodRoutes);
 // app.use('/api/drink', drinkRoutes);
 
