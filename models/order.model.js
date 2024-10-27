@@ -7,21 +7,25 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     orderItems: [{
-        food: {
+        itemFood: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Food",
             required: false
         },
-        drinks: {
+        itemDrink: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Drinks",
+            ref: "Drink",
             required: false
         },
-        quantity: {
-            type: Number,
+        name: {
+            type: String,
             required: true
         },
-        price: {
+        image: {
+            type: String,
+            required: true,
+        },
+        quantity: {
             type: Number,
             required: true
         },
@@ -42,7 +46,7 @@ const orderSchema = new mongoose.Schema({
     orderStatus: {
         type: String,
         required: true,
-        enum: ["Pending", "Preparing", "Ready", "Delivered"],
+        enum: ["Pending", "Ready", "Delivered"],
         default: "Pending"
     },
     createdAt: {

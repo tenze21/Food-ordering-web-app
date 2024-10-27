@@ -1,0 +1,19 @@
+:root {
+  --primary: #e67817;
+  --blue: #0127d1;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Open sans", serif;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 700;
+  --radius-large: 0.625rem;
+  --radius-small: 0.5rem;
+  --transition-hover: all 200ms ease-in-out;
+  --check-box: #0af40a;
+  --body-bg: #eaeaea;
+}

@@ -3,6 +3,7 @@ const passport = require("passport");
 const authController = require("../controllers/auth.controller");
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
+
 router
   .route("/")
   .get(ensureLoggedOut({redirectTo: "/user/home"}) ,authController.getLogin)
@@ -21,5 +22,7 @@ router
   .post(authController.createUser);
 
 router.get("/logout", ensureLoggedIn({ redirectTo: "/" }),authController.logout);
+
+
 
 module.exports = router;

@@ -7,14 +7,13 @@
         <br />
         <h3><%= error.status %> | <%= error.message %></h3>
         <br />
-        <% if (user) { %>
+        <% if (user && user.role!=='admin') { %>
             <a href="/user/home">← Back to home</a>
-            <% if (user.role === 'admin') { %>
-                <a href="/admin/food">← Back Admin home</a>
-            <% } %>
-        <% }else{%>
+        <% }else if(user && user.role==='admin'){ %>
+            <a href="/admin/food">← Back home</a>
+        <%}else{%>
             <a href="/">← Back to Login</a>
-        <% } %>
+        <%}%>
     </main>
 </body>
 </html>

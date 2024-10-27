@@ -22,6 +22,23 @@
         <button class="checkout-btn">Checkout  <span>Nu.<span class="total-payment">0</span></span><button>
     </main>
     <%- include('./layouts/footer')  %>
+    <dialog class="checkout-modal">
+        <form method="dialog" id="checkout-form">
+            <div class="header">
+                <h1>Checkout</h1>
+                <button class="modal-close" type="button"><i class='bx bx-x'></i></button> 
+            </div>
+            <hr/>
+            <div class="d-flex">
+                <div class="account-number">
+                  <p>210815175</p>
+                  <button data-copy="210815175" class="copy-btn" type="button" onclick="copyAccountNumber()" title="copy"><i class='bx bx-copy'></i></button>
+                </div>
+                <input type="number" name="journalNumber" id="journalNumber" placeholder="Journal Number" required>
+            </div>
+            <button class="order-btn" type="submit">Place Order</button>
+        </form>
+    </dialog>
     <script src="/js/cart.js"></script>
 </body>
 </html>

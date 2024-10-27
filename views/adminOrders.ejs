@@ -1,0 +1,100 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/adminOrder.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <main class="wrapper">
+        <h1>Orders</h1>
+        <h3 class="total-amount">Total Amount: Nu.<%= totalPrice %></h3>
+        <div class="container">
+          <% orders.forEach(order => { %>
+            <% if (order.orderStatus === "Ready") { %>
+              <div class="js-disclosure completed-order" data-state="no-js">
+                      <button
+                      class="disclosure_button js_disclosure_btn"
+                      aria-expanded="false"
+                      aria-controls="answer-1"
+                      disabled
+                      title="This button becomes functional once Javascript is active"
+                      >
+                        <div class="user-detail">
+                          <a href="#"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
+                           <p><%= order.user.name %> (<%= order.user.contactNumber %>, <%= order.user.email %>)</p>
+                        </div>
+                        <i class='bx bx-chevron-down show' aria-hidden="true"></i>
+                      </button>
+        
+                <div class="orders">
+                  <div class="order-items">
+                      <% order.orderItems.forEach(item => { %>
+                        <div class="order-item">
+                          <img src="<%= item.image %>" alt="<%= item.name %>">
+                          <div class="details">
+                              <strong><%= item.name %></strong>
+                              <p class="instruction"><%= item.specialInstructions %></p>
+                          </div>
+                          <p class="quantity"><%= item.quantity %></p>
+                        </div>
+                        <% }) %>
+                  </div>
+                    <div class="order-details">
+                      <div>
+                          <p>Journal Number: <%= order.journalNumber %></p> 
+                          <p>Total Price: Nu. <%= order.totalPrice %></p>
+                      </div>
+                      <div class="btns">
+                        <button class="completed" data-id="<%= order._id %>" disabled>Mark as completed</button>
+                        <button class="delete" title="delete" data-id="<%= order._id %>"><i class='bx bx-trash'></i></button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            <% }else{ %>
+              <div class="js-disclosure" data-state="no-js">
+                <button
+                class="disclosure_button js_disclosure_btn"
+                aria-expanded="false"
+                aria-controls="answer-1"
+                disabled
+                title="This button becomes functional once Javascript is active"
+                >
+                  <div class="user-detail">
+                    <a href="#"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
+                     <p><%= order.user.name %> (<%= order.user.contactNumber %>, <%= order.user.email %>)</p>
+                  </div>
+                  <i class='bx bx-chevron-down show' aria-hidden="true"></i>
+                </button>
+  
+          <div class="orders">
+            <div class="order-items">
+                <% order.orderItems.forEach(item => { %>
+                  <div class="order-item">
+                    <img src="<%= item.image %>" alt="<%= item.name %>">
+                    <div class="details">
+                        <strong><%= item.name %></strong>
+                        <p class="instruction"><%= item.specialInstructions %></p>
+                    </div>
+                    <p class="quantity"><%= item.quantity %></p>
+                  </div>
+                  <% }) %>
+            </div>
+              <div class="order-details">
+                <div>
+                    <p>Journal Number: <%= order.journalNumber %></p> 
+                    <p>Total Price: Nu. <%= order.totalPrice %></p>
+                </div>
+                <div class="btns">
+                  <button class="completed" data-id="<%= order._id %>">Mark as completed</button>
+                  <button class="delete" title="delete" disabled><i class='bx bx-trash'></i></button>
+                </div>
+              </div>
+          </div>
+        </div>
+            <% } %>
+          <% }) %>
+        </div>
+    </main>
+    <%- include('./layouts/footer')  %>
+    <script src="/js/adminOrder.js"></script>
+</body>
+</html>

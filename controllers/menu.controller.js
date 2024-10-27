@@ -1,7 +1,9 @@
 const Food = require("../models/food.model");
 const Drink = require("../models/drink.model");
-const { default: mongoose } = require("mongoose");
 
+// get food items on menu
+// private
+// /menu/food
 exports.getFood = async (req, res, next) => {
   try {
     const foods = await Food.find();
@@ -11,6 +13,10 @@ exports.getFood = async (req, res, next) => {
   }
 };
 
+
+// get food items on menu
+// private
+// /menu/drinks
 exports.getDrinks = async (req, res, next) => {
   try {
     const drinks = await Drink.find();
@@ -21,16 +27,22 @@ exports.getDrinks = async (req, res, next) => {
 };
 
 // get add food page
+// private/admin
+// /admin/food
 exports.getAddFoodPage = async (req, res) => {
   res.render('addFood');
 }
 
 // get add drink page
+// private/admin
+// admin/drink
 exports.getAddDrinkPage = async (req, res) => {
   res.render('addDrinks');
 }
 
 // Add Food Item
+// private/admin
+// /menu/food/new
 exports.addFood = async (req, res, next) => {
   try {
     const newFood = await Food.create(req.body); // Create a new food item with the request body data
@@ -44,6 +56,8 @@ exports.addFood = async (req, res, next) => {
 
 
 // Add Drink Item
+// private/admin
+// /menu/drinks/new
 exports.addDrink = async (req, res, next) => {
   try {
     const newDrink = await Drink.create(req.body); // Create a new drink item with the request body data
@@ -58,6 +72,8 @@ exports.addDrink = async (req, res, next) => {
 };
 
 //Update a drink
+// private/admin
+// /menu/drinks/:id
 exports.updateDrink = async (req, res) => {
   try {
     const drinkId = req.params.id;
@@ -72,12 +88,19 @@ exports.updateDrink = async (req, res) => {
 };
 
 //Updating a food item
+// private/admin
+// /menu/food/:id
 exports.updateFood = async (req, res) => {
   try {
     const foodId = req.params.id;
-    const updatedFood = await Food.findByIdAndUpdate(menuId, req.body, {
-      new: true,
+    const updatedFood = await Food.findByIdAndUpdate(foodId, req.body, {
+      new: true, // Return the updated document
+      runValidators: true // Ensure validation is applied to the update
     });
+
+    if (!updatedFood) {
+      return res.status(404).json({ error: "Food item not found" });
+    }
 
     res.status(200).json(updatedFood);
   } catch (error) {

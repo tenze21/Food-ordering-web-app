@@ -7,13 +7,13 @@ const foods = [];
 wrapper.innerHTML = "<h1 class='no-food'>Loading...</h1>";
 
 function getFood() {
-    fetch("/menu/food")
+  fetch("/menu/food")
     .then((res) => res.json())
     .then((data) => {
-        data.forEach((food) => {
-            foods.push(food);
-        });
-        wrapper.innerHTML = "";
+      data.forEach((food) => {
+        foods.push(food);
+      });
+      wrapper.innerHTML = "";
       foods.forEach((food) => showFood(food));
     })
     .catch((err) => {
@@ -48,7 +48,7 @@ function showFood(food) {
                 </div>
             </a>
             <div class="set-availability">
-                <input type="checkbox" checked>
+                <input type="checkbox" checked id="availability-setter" onChange="updateAvailability('${food._id}','${food.isAvailable}')">
             </div>
         </div>
         `;
@@ -64,9 +64,39 @@ function showFood(food) {
                 </div>
             </a>
             <div class="set-availability">
-                <input type="checkbox">
+                <input type="checkbox" id="availability-setter" onChange="updateAvailability('${food._id}', '${food.isAvailable}')">
             </div>
         </div>
         `;
   }
 }
+
+function updateAvailability(id, isAvailable) {
+  let data;
+  if(isAvailable==='true'){
+    data={isAvailable: false}
+  }else{
+    data= {isAvailable: true}
+  }
+  
+  fetch(`/menu/food/${id}`,{
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data),
+  }).catch(err=>{
+    showUpdateError(err.message);
+  })
+}
+
+const hideError = () => {
+  const el = document.querySelector(".order-success");
+  if (el) el.parentElement.removeChild(el);
+};
+
+// type is success or error
+const showUpdateError = (message) => {
+  hideError();
+  const markup = `<div class="update-error">There was an error: ${message}</div>`;
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+  window.setTimeout(hideError, 3000);
+};

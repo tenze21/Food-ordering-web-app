@@ -33,3 +33,34 @@ exports.logout = async (req, res, next) => {
     res.redirect("/");
   });
 };
+
+// Controller to display the user's profile
+exports.getProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id); // Assuming req.user holds the authenticated user's info
+        res.render('userProfile', { user });
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Error loading profile');
+        res.redirect('/user/home');
+    }
+};
+
+// Controller to update the user's profile
+exports.updateProfile = async (req, res) => {
+    const { name, email, bio } = req.body;
+
+    try {
+        // Find the user by ID and update their profile
+        await User.findByIdAndUpdate(req.user.id, { name, email, bio });
+
+        req.flash('success', 'Profile updated successfully');
+        res.redirect('/user/profile');
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Error updating profile');
+        res.redirect('/user/profile');
+    }
+};
+
+

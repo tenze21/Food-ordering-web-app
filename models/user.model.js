@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : true,
     },
+    profile: {
+        type: String,
+        required: true,
+        default: '/images/user.jpg',
+    },
     contactNumber: {
         type: Number,
         required: true
@@ -36,6 +41,10 @@ const userSchema = new mongoose.Schema({
         required : true,
         minlength: 8,
         select: false,
+    },
+    photo: {
+        type: String,
+        default: 'default.jpg',
     },
     role:{
         type: String,
