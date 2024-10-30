@@ -14,4 +14,11 @@ router.post('/upload', upload.array('images', 5), (req,res) => {
   }
 })
 
+router.patch(
+  '/updateProfile',
+  authController.protect,
+  authController.updateProfile
+)
+
+
 module.exports = router;

@@ -1,9 +1,10 @@
 const multer = require('multer');
-
+const User = require('../models/user.model');
+const AppError = require('../utils/appError');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>{
-    cb(null, 'images/');
+    cb(null, 'public/images');
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -27,5 +28,4 @@ const upload = multer({
     }
   }
 });
-
-module.exports = upload;
+exports.uploadUserPhoto = upload.single('image');

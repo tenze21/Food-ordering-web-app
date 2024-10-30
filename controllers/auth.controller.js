@@ -47,20 +47,33 @@ exports.getProfile = async (req, res) => {
 };
 
 // Controller to update the user's profile
-exports.updateProfile = async (req, res) => {
-    const { name, email, bio } = req.body;
+exports.updateProfile = async (req, res, next) => {
+  try {
+    if (req.body.password || req.body.confirmPassword) {
+      return next(
+        new Error("Please enter your current password to update your profile", 400
 
-    try {
-        // Find the user by ID and update their profile
-        await User.findByIdAndUpdate(req.user.id, { name, email, bio });
+        ),
+      )
+  }
 
-        req.flash('success', 'Profile updated successfully');
-        res.redirect('/user/profile');
-    } catch (err) {
-        console.error(err);
-        req.flash('error', 'Error updating profile');
-        res.redirect('/user/profile');
+  const filteredBody= filterObj(req.body, "name", "email")
+  if (req.body.photo !== 'undefined'){
+    filteredBody.photo = req.file.filename
+  }
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
     }
+  }
+  )}catch (error) {
+  next(err);
+  }
 };
 
 
