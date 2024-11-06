@@ -4,32 +4,36 @@
     </head>
 
     <body>
+        <%- include('./layouts/navbar') %>
         <main class="wrapper">
             <%- include('./layouts/flash-message') %>
                 <title>Edit Profile</title>
 
+                <form id="profile-form" class="profile-form">
                 <div class="profile-header">
                     <div class="profile-picture-container">
-                        <img src="<%= user.profilePicture || '/' %>" alt="Profile Picture" class="profile-picture"
+                        <img src="<%= user.profile || '/' %>" alt="Profile Picture" class="profile-picture"
                             id="profile-image">
-                        <div class="profile-picture-overlay">
+                        <input type="file" accept="image/*" id="profilePicture" name="profile">
+                        <label for="profilePicture" class="profile-picture-overlay">
                             <span class="profile-picture-text">Click to change</span>
-                        </div>
+                        </label>
                     </div>
                     <h1 class="profile-name">
                         <%= user.name %>
                     </h1>
                 </div>
-
-                <form id="profile-form" class="profile-form">
+                <div class="d-grid">
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email" value="<%= user.email %>" required>
+                        <small style="color: red;"></small>
                     </div>
                     <div class="form-group">
                         <label for="contact">Contact Number:</label>
                         <input type="text" name="contactNumber" id="contactNumber" value="<%= user.contactNumber %>"
                             required>
+                            <small style="color: red;"></small>
                     </div>
                     <div class="form-group">
                         <label for="address">Address:</label>
@@ -42,24 +46,18 @@
                     <div class="form-group">
                         <label for="gender">Gender:</label>
                         <select id="gender" name="gender" required>
-                            <option value="male" <%=user.gender==='male' ? 'selected' : '' %>>Male</option>
-                            <option value="female" <%=user.gender==='female' ? 'selected' : '' %>>Female</option>
-                            <option value="other" <%=user.gender==='other' ? 'selected' : '' %>>Other</option>
+                            <option value="Male" <%=user.gender==='male' ? 'selected' : '' %>>Male</option>
+                            <option value="Female" <%=user.gender==='female' ? 'selected' : '' %>>Female</option>
+                            <option value="Other" <%=user.gender==='other' ? 'selected' : '' %>>Other</option>
                         </select>
                     </div>
-                    <!-- <input type="file" id="profile-pic" name="profile-pic" accept="image/*" style="display: none;"> -->
-                    
-
-                </form>
-                
-                <div>
-                    <button type="submit" class="submit-button">
-                        Update Profile
-                    </button>
                 </div>
-                
+                <div>
+                    <input type="submit" class="submit-button" id="submit-btn" value="Update Profile">
+                </div>
+            </form>
         </main>
-
+        <%- include('./layouts/footer')  %>
         <script src="/js/userProfile.js"></script>
     </body>
 

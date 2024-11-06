@@ -1,5 +1,67 @@
+const path = require("path");
 const Food = require("../models/food.model");
 const Drink = require("../models/drink.model");
+const multer = require("multer");
+
+const multerStorageFood = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/food/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+
+function fileFilter(req, file, cb) {
+  const filetypes = /jpe?g|png|webp/;
+  const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
+
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = mimetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    cb(null, true);
+  } else {
+    cb(new Error("Images only!"), false);
+  }
+}
+
+const uploadFoodImg = multer({
+  storage: multerStorageFood,
+  fileFilter: fileFilter,
+});
+exports.uploadFood = uploadFoodImg.single("image");
+
+const multerStorageDrink = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/drinks/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+
+function fileFilter(req, file, cb) {
+  const filetypes = /jpe?g|png|webp/;
+  const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
+
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = mimetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    cb(null, true);
+  } else {
+    cb(new Error("Images only!"), false);
+  }
+}
+
+const uploadDrinkImg = multer({
+  storage: multerStorageDrink,
+  fileFilter: fileFilter,
+});
+exports.uploadDrink = uploadDrinkImg.single("image");
 
 // get food items on menu
 // private
@@ -13,7 +75,6 @@ exports.getFood = async (req, res, next) => {
   }
 };
 
-
 // get food items on menu
 // private
 // /menu/drinks
@@ -26,49 +87,41 @@ exports.getDrinks = async (req, res, next) => {
   }
 };
 
-// get add food page
-// private/admin
-// /admin/food
-exports.getAddFoodPage = async (req, res) => {
-  res.render('addFood');
-}
-
-// get add drink page
-// private/admin
-// admin/drink
-exports.getAddDrinkPage = async (req, res) => {
-  res.render('addDrinks');
-}
-
 // Add Food Item
 // private/admin
 // /menu/food/new
 exports.addFood = async (req, res, next) => {
   try {
-    const newFood = await Food.create(req.body); // Create a new food item with the request body data
-    // req.flash("success", `"${newFood.title}" added successfully to menu!`); // Success message
-    // res.redirect("/admin/food"); // Redirect or send a response
-    res.json(newFood);
-  } catch (error) {
-    res.json({"error": error.message}); // Pass the error to the next middleware
+    const { title, price, description, category } = req.body;
+    const image = `/images/food/${req.file.filename}`;
+    await Food.create({
+      title,
+      price,
+      description,
+      category,
+      images: image,
+    });
+    res.status(200).redirect("/admin/food/new");
+  } catch (err) {
+    next(err);
   }
 };
-
 
 // Add Drink Item
 // private/admin
 // /menu/drinks/new
 exports.addDrink = async (req, res, next) => {
   try {
-    const newDrink = await Drink.create(req.body); // Create a new drink item with the request body data
-    // req.flash("success", `Drink item "${newDrink.title}" added successfully!`); // Success message
-    // res.redirect("/"); // Redirect or send a response
-    res.json(newDrink)
-  } catch (error) {
-    // req.flash("error", "Server error. Could not add drink item."); // Error message
-    // next(error); // Pass the error to the next middleware
-    res.json({"error": error.message});
-  }
+    const { title, price, description } = req.body;
+    const image = `/images/drinks/${req.file.filename}`;
+    await Drink.create({
+      title,
+      price,
+      description,
+      images: image,
+    });
+    res.status(200).redirect("/admin/drinks/new");
+  } catch (err) {}
 };
 
 //Update a drink
@@ -95,7 +148,7 @@ exports.updateFood = async (req, res) => {
     const foodId = req.params.id;
     const updatedFood = await Food.findByIdAndUpdate(foodId, req.body, {
       new: true, // Return the updated document
-      runValidators: true // Ensure validation is applied to the update
+      runValidators: true, // Ensure validation is applied to the update
     });
 
     if (!updatedFood) {
@@ -107,5 +160,3 @@ exports.updateFood = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-

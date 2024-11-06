@@ -58,6 +58,7 @@ app.use(
 );
 
 app.use("/menu", ensureLoggedIn({ redirectTo: "/" }), require("./routes/menu.route"));
+app.use("/user/upload", ensureLoggedIn({ redirectTo: "/" }), require("./routes/profileUpload.route"));
 
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());
@@ -67,7 +68,6 @@ app.use((error, req, res, next) => {
   error.status = error.status || 500;
   res.status(error.status);
   res.render("error_40x", { error });
-  console.log(error);
 });
 
 // app.use('/api/food', foodRoutes);

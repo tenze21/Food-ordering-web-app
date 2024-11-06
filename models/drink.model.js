@@ -21,7 +21,6 @@ const drinkSchema = new mongoose.Schema({
     images: {
         type: String,
         required: true,
-        default: 'default.jpg'
     },
 
     isAvailable: {

@@ -2,9 +2,6 @@ const express = require("express");
 const router = express.Router();
 const menuController = require("../controllers/menu.controller");
 
-router.get("/food/new", ensureAdmin, menuController.getAddFoodPage);
-router.get("/drinks/new", ensureAdmin, menuController.getAddDrinkPage);
-
 router.route("/food").get(menuController.getFood).post(menuController.addFood);
 router
   .route("/drinks")

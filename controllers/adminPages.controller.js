@@ -18,3 +18,10 @@ exports.getOrders = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAddFoodPage= async(req, res)=>{
+  res.render("addFood");
+}
+exports.getAddDrinksPage= async(req, res)=>{
+  res.render("addDrinks");
+}

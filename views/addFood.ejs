@@ -4,10 +4,46 @@
 <body>
     <%- include('./layouts/navbar') %>
     <main class="wrapper">
-        <div class="add-menu">
-            <a href="#">Add Recipe</a>
+        <div class="back-nav">
+            <a href="/admin/food"><i class='bx bx-left-arrow-alt'></i></a>
         </div>
+        <form action="/admin/food/new" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <img src="/images/gallery-outline.png" alt="food image" id="image">
+                <label for="food-image" class="file-label"><i class='bx bxs-camera'></i></label>
+                <input type="file" accept="image/*" name="image" id="food-image" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Nu.</span>
+                    <input type="number" inputmode="numeric" name="price" id="price" autocomplete="off" spellcheck="false" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div class="form-group" style="align-self: flex-start;">
+                <fieldset>
+                    <div>
+                        <input type="radio" name="category" id="veg" value="veg" required>
+                        <label for="veg">Veg</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="category" id="nonveg" value="nonveg">
+                        <label for="nonveg">Non-Veg</label>
+                    </div>
+                </fieldset>
+            </div>
+            <input type="submit" value="Add Recipe" id="submit-btn">
+        </form>
     </main>
     <%- include('./layouts/footer') %>
+    <script src="/js/addMenu.js"></script>
 </body>
 </html>

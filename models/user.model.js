@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     profile: {
         type: String,
         required: true,
-        default: '/images/user.jpg',
+        default: '/images/user/user.jpg',
     },
     contactNumber: {
         type: Number,
