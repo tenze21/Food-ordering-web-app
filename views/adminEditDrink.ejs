@@ -1,0 +1,37 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/addMenu.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <main class="wrapper">
+        <div class="back-nav">
+            <a href="/admin/drinks"><i class='bx bx-left-arrow-alt'></i></a>
+        </div>
+        <form id="drink-form">
+            <div class="form-group">
+                <img src="<%= drink.images %>" alt="food image" id="image">
+                <label for="drink-image" class="file-label"><i class='bx bxs-camera'></i></label>
+                <input type="file" accept="image/*" name="image" id="drink-image">
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" autocomplete="off" spellcheck="false" value="<%= drink.title %>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Nu.</span>
+                    <input type="number" inputmode="numeric" name="price" id="price" autocomplete="off" spellcheck="false" value="<%= drink.price %>" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"><%= drink.description %></textarea>
+            </div>
+            <input type="submit" value="Save Changes" id="submit-btn">
+        </form>
+    </main>
+    <%- include('./layouts/footer')  %>
+    <script src="/js/editDrink.js"></script>
+</body>
+</html>

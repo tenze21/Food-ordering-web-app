@@ -2,16 +2,13 @@ const express = require("express");
 const router = express.Router();
 const menuController = require("../controllers/menu.controller");
 
-router.route("/food").get(menuController.getFood).post(menuController.addFood);
-router
-  .route("/drinks")
-  .get(menuController.getDrinks)
-  .post(menuController.addDrink);
 
 //Routes for drinks
-router.put("/drinks/:id",ensureAdmin, menuController.updateDrink);
+router.route("/drinks").get(menuController.getDrinks);
+router.put("/drinks/:id", ensureAdmin, menuController.updateDrink);
 
 //Routes for food menu
+router.route("/food").get(menuController.getFood);
 router.put("/food/:id", ensureAdmin, menuController.updateFood);
 
 function ensureAdmin(req, res, next) {
@@ -21,6 +18,5 @@ function ensureAdmin(req, res, next) {
     res.redirect("/user/home");
   }
 }
-
 
 module.exports = router;

@@ -130,11 +130,15 @@ exports.addDrink = async (req, res, next) => {
 exports.updateDrink = async (req, res) => {
   try {
     const drinkId = req.params.id;
-    const updatedDrink = await Drink.findByIdAndUpdate(drinkId, req.body, {
-      new: true,
+    const { title, price, images, description } = req.body;
+    await Drink.findByIdAndUpdate(drinkId, {
+      title,
+      price,
+      images,
+      description,
     });
 
-    res.status(200).json(updatedDrink);
+    res.status(200).json({ message: "Menu updated successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -146,16 +150,16 @@ exports.updateDrink = async (req, res) => {
 exports.updateFood = async (req, res) => {
   try {
     const foodId = req.params.id;
-    const updatedFood = await Food.findByIdAndUpdate(foodId, req.body, {
-      new: true, // Return the updated document
-      runValidators: true, // Ensure validation is applied to the update
+    const { title, price, images, description, category } = req.body;
+    await Food.findByIdAndUpdate(foodId, {
+      title,
+      price,
+      images,
+      description,
+      category,
     });
 
-    if (!updatedFood) {
-      return res.status(404).json({ error: "Food item not found" });
-    }
-
-    res.status(200).json(updatedFood);
+    res.status(200).json({ message: "Menu updated successfully." });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,0 +1,49 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/addMenu.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <main class="wrapper">
+        <div class="back-nav">
+            <a href="/admin/food"><i class='bx bx-left-arrow-alt'></i></a>
+        </div>
+        <form id="food-form">
+            <div class="form-group">
+                <img src="<%= food.images %>" alt="food image" id="image">
+                <label for="food-image" class="file-label"><i class='bx bxs-camera'></i></label>
+                <input type="file" accept="image/*" name="image" id="food-image">
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" autocomplete="off" spellcheck="false" value="<%= food.title %>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Nu.</span>
+                    <input type="number" inputmode="numeric" name="price" id="price" autocomplete="off" spellcheck="false" value="<%= food.price %>" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"><%= food.description %></textarea>
+            </div>
+            <div class="form-group" style="align-self: flex-start;">
+                <fieldset>
+                    <div>
+                        <input type="radio" name="category" id="veg" value="veg" <%= food.category === 'veg' ? 'checked' : ''  %> required>
+                        <label for="veg">Veg</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="category" id="nonveg" value="nonveg" <%= food.category === 'nonveg' ? 'checked' : ''  %>>
+                        <label for="nonveg">Non-Veg</label>
+                    </div>
+                </fieldset>
+            </div>
+            <input type="submit" value="Save Changes" id="submit-btn">
+        </form>
+    </main>
+    <%- include('./layouts/footer')  %>
+    <script src="/js/editFood.js"></script>
+</body>
+</html>

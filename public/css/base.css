@@ -117,9 +117,16 @@
     list-style: none;
     gap: 2rem;
     height: 70px;
-    div{
+    .nav-wrapper{
       display: flex;
-      gap: 1rem;
+      gap: 3rem;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(3rem);
+    }
+    .side-nav{
+      display: flex;
+      gap: 1.5rem;
     }
     .nav-item {
       img{
@@ -130,7 +137,7 @@
         text-decoration: none;
         color: #fff;
         font-family: var(--font-primary);
-        font-size: clamp(1rem, 1.8vw, 2.5rem);
+        font-size: clamp(1rem, 1.5vw, 2.5rem);
         font-weight: var(--font-weight-semi-bold);
         transition: var(--transition-hover);
         &:hover{
@@ -188,7 +195,7 @@ footer{
   font-size: 1rem;
   background-color: var(--primary);
   border-radius: 50%;
-  padding: 0.3rem 0.6rem;
+  padding: 3px 9px;
   top: 5px;
   font-family: var(--font-secondary);
 }

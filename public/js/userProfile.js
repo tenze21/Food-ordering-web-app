@@ -8,6 +8,11 @@ const genderEl = document.getElementById("gender");
 const form = document.querySelector("#profile-form");
 const submitBtn = document.getElementById("submit-btn");
 
+const profileNav = document.querySelector(".profile");
+profileNav.setAttribute("aria-current", "page");
+const homeNav= document.querySelector(".home");
+homeNav.removeAttribute("aria-current");
+
 let profilePath;
 profileInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
