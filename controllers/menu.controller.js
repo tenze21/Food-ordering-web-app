@@ -46,8 +46,6 @@ exports.getAddDrinkPage = async (req, res) => {
 exports.addFood = async (req, res, next) => {
   try {
     const newFood = await Food.create(req.body); // Create a new food item with the request body data
-    // req.flash("success", `"${newFood.title}" added successfully to menu!`); // Success message
-    // res.redirect("/admin/food"); // Redirect or send a response
     res.json(newFood);
   } catch (error) {
     res.json({"error": error.message}); // Pass the error to the next middleware
@@ -61,12 +59,8 @@ exports.addFood = async (req, res, next) => {
 exports.addDrink = async (req, res, next) => {
   try {
     const newDrink = await Drink.create(req.body); // Create a new drink item with the request body data
-    // req.flash("success", `Drink item "${newDrink.title}" added successfully!`); // Success message
-    // res.redirect("/"); // Redirect or send a response
     res.json(newDrink)
   } catch (error) {
-    // req.flash("error", "Server error. Could not add drink item."); // Error message
-    // next(error); // Pass the error to the next middleware
     res.json({"error": error.message});
   }
 };
