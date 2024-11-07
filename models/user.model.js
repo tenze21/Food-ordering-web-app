@@ -56,9 +56,6 @@ userSchema.pre('save', async function (next) {
     try {
         if (this.isModified('password')){
             this.password = await bcrypt.hash(this.password, 12)
-            if(this.email===process.env.ADMIN_EMAIL.toLowerCase()){
-                this.role="admin";
-            };
         } 
     } catch (error) {
         next(error);
