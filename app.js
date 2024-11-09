@@ -59,6 +59,8 @@ app.use(
 
 app.use("/menu", ensureLoggedIn({ redirectTo: "/" }), require("./routes/menu.route"));
 app.use("/user/upload", ensureLoggedIn({ redirectTo: "/" }), require("./routes/profileUpload.route"));
+app.use("/food/upload", require("./routes/foodImageUpdate.route"));
+app.use("/drinks/upload", require("./routes/drinkImageUpdate.route"));
 
 app.use((req, res, next) => {
   next(createHttpErrors.NotFound());

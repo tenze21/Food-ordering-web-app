@@ -79,7 +79,7 @@ function updateAvailability(id, isAvailable) {
     data= {isAvailable: true}
   }
   
-  fetch(`/menu/food/${id}`,{
+  fetch(`/menu/food/availability/${id}`,{
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(data),

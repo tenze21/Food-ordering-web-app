@@ -1,0 +1,32 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/adminUserProfile.css">
+</head>
+<body>
+    <main>
+        <h1 class="title">User Profile</h1>
+        <img src="<%= user.profile %>" alt="profile of <%= user.name %>">
+        <div class="user-details">
+            <div>
+                <h3>Name: <%= user.name %></h3>
+            </div>
+            <div>
+                <h3>Contact Number: <%= user.contactNumber %></h3>
+            </div>
+            <div>
+                <h3>Email: <%= user.email %></h3>
+            </div>
+            <div>
+                <h3>Address: <%= user.address %></h3>
+            </div>
+            <div>
+                <h3>Designation: <%= user.designation %></h3>
+            </div>
+        </div>
+    </main>
+    <%- include('./layouts/footer') %>
+    <script>
+        const homeNav= document.querySelector(".home");
+        homeNav.removeAttribute("aria-current");
+    </script>
+</body>
+</html>

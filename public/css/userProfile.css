@@ -116,6 +116,10 @@ input[type="file"] {
     color: #fff;
     border: 1px solid var(--primary);
   }
+  &:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,32 @@
+<%- include('./layouts/header') %>
+<link rel="stylesheet" href="/css/userReviews.css">
+</head>
+<body>
+    <%- include('./layouts/navbar') %>
+    <h1 class="title">Reviews</h1>
+    <main>
+        <% reviews.forEach(review => { %>
+                <article aria-label="review by <%= review.user.name %>" class="review-container">
+                    <div class="user-detail">
+                        <img src="<%= review.user.profile %>" alt="" aria-hidden="true">
+                        <div>
+                            <p><%= review.user.name %></p>
+                            <p><%= review.user.email %>, <%= review.user.contactNumber %></p>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <p><%= review.review %></p>
+                    </div>
+                    <small class="date">
+                        <% 
+                        const dateString = review.createdAt instanceof Date ? review.createdAt.toString() : review.createdAt; 
+                        const dateParts = dateString.split(" "); 
+                        %>
+                        <span><%= dateParts[0] %></span>, <span><%= dateParts[1] %></span> <span><%= dateParts[2] %></span>, <span><%= dateParts[3] %></span>, <span><%= dateParts[4] %></span>
+                    </small>
+                </article>
+        <% }) %>
+    </main>
+    <%- include('./layouts/footer')  %>
+    <script src="/js/adminReviews.js"></script>
+</body>
