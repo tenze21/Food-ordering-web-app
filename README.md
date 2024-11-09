@@ -10,6 +10,7 @@ The *canteen food system* project is being carried out as a part of the **comput
 - [Project Images](#project-images)
 - [Techstack](#techstack)
 - [Project Setup Instructions](#project-setup-instructions)
+- [Team](#team)
 - [Acknowledgement](#acknowledgement)
 - [Important Links](#important-links)
 
