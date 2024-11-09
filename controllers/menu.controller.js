@@ -164,3 +164,18 @@ exports.updateFood = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.updateFoodAvailability= async(req, res) =>{
+  try {
+    await Food.findByIdAndUpdate(req.params.id, req.body);
+  } catch (err) {
+    next(err);
+  }
+}
+exports.updateDrinkAvailability= async(req, res) =>{
+  try {
+    await Drink.findByIdAndUpdate(req.params.id, req.body);
+  } catch (err) {
+    next(err);
+  }
+}

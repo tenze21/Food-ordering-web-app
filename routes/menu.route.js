@@ -11,6 +11,9 @@ router.put("/drinks/:id", ensureAdmin, menuController.updateDrink);
 router.route("/food").get(menuController.getFood);
 router.put("/food/:id", ensureAdmin, menuController.updateFood);
 
+router.put("/food/availability/:id", ensureAdmin, menuController.updateFoodAvailability);
+router.put("/drinks/availability/:id", ensureAdmin, menuController.updateDrinkAvailability);
+
 function ensureAdmin(req, res, next) {
   if (req.user.role === "admin") {
     next();

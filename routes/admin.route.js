@@ -11,6 +11,8 @@ router.route("/food/new").get(adminPagesController.getAddFoodPage).post(menuCont
 router.route("/drinks/new").get(adminPagesController.getAddDrinksPage).post(menuController.uploadDrink, menuController.addDrink);
 router.get("/food/:id", adminPagesController.getUpdateFoodPage);
 router.get("/drinks/:id", adminPagesController.getUpdateDrinksPage);
+router.get("/reviews", adminPagesController.getReviewsPage);
+router.get("/user/:id", adminPagesController.getUserProfile);
 
 module.exports = router;
 

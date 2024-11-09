@@ -18,7 +18,7 @@
                       title="This button becomes functional once Javascript is active"
                       >
                         <div class="user-detail">
-                          <a href="#"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
+                          <a href="/admin/user/<%= order.user._id %>" target="_blank"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
                            <p><%= order.user.name %> (<%= order.user.contactNumber %>, <%= order.user.email %>)</p>
                         </div>
                         <i class='bx bx-chevron-down show' aria-hidden="true"></i>
@@ -59,7 +59,7 @@
                 title="This button becomes functional once Javascript is active"
                 >
                   <div class="user-detail">
-                    <a href="#"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
+                    <a href="/admin/user/<%= order.user._id %>" target="_blank"><img src="<%= order.user.profile %>" alt="" aria-hidden="true"></a> 
                      <p><%= order.user.name %> (<%= order.user.contactNumber %>, <%= order.user.email %>)</p>
                   </div>
                   <i class='bx bx-chevron-down show' aria-hidden="true"></i>

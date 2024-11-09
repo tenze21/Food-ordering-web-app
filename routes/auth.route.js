@@ -6,7 +6,7 @@ const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
 router
   .route("/")
-  .get(ensureLoggedOut({redirectTo: "/user/home"}) ,authController.getLogin)
+  .get(ensureLoggedOut({redirectTo: "/admin/food"}) ,authController.getLogin)
   .post(
     passport.authenticate("local", {
       // successRedirect: "/user/home",

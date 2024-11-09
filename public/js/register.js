@@ -53,7 +53,7 @@ nameEl.addEventListener("input", () => {
 });
 emailEl.addEventListener("input", () => {
   const email = emailEl.value.trim();
-  const re = /^[0-9]{8}\.gcit@rub\.edu\.bt$/;
+  const re = /.*\.gcit@rub\.edu\.bt$/;
 
   if (!re.test(email) && email !== "") {
     showError(emailEl, "Email must be your college email");

@@ -1,5 +1,6 @@
 const Order = require("../models/order.model");
 const User = require("../models/user.model");
+const Review = require("../models/review.model");
 exports.getHome = async (req, res, next) => {
   res.render("index");
 };
@@ -47,5 +48,28 @@ exports.updateProfile = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+  }
+};
+
+exports.getReviewPage = async (req, res) => {
+  const reviews = await Review.find().populate("user");
+  res.render("userReviews", { reviews, userId: req.user._id });
+};
+
+exports.createReview = async (req, res, next) => {
+  try {
+    const { review } = req.body;
+    await Review.create({ review, user: req.user._id });
+    res.redirect("/user/reviews");
+  } catch (err) {
+    next(err);
+  }
+};
+exports.deleteReview = async (req, res, next) => {
+  try {
+    await Review.findByIdAndDelete(req.params.id);
+    res.redirect("/user/reviews");
+  } catch (err) {
+    next(err);
   }
 };
