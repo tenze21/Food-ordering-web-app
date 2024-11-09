@@ -51,7 +51,11 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
     try {
         if (this.isModified('password')){
-            this.password = await bcrypt.hash(this.password, 12)
+            this.password = await bcrypt.hash(this.password, 12);
+            // run only once during admin registration
+            // if(this.email === 'admin@email'){
+            //     this.role = 'admin'
+            // }
         } 
     } catch (error) {
         next(error);
